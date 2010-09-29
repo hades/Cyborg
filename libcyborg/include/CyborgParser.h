@@ -29,7 +29,7 @@
 
 #include "Cyborg_Global.h"
 
-struct CYBORG_EXPORT CyborgNotice
+class CYBORG_EXPORT CyborgNotice
 {
 public:
     enum EventType { RING, SMS, MMS, BATTERY, PING, UNDEFINED=0xff };
