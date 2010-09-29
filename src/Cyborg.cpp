@@ -45,17 +45,24 @@ Cyborg::Cyborg(int argc, char**argv)
     exit->setShortcuts(QKeySequence::Quit);
     connect(exit, SIGNAL(triggered()), SLOT(quit()));
 
+    QAction* tcp = new QAction(tr("&TCP Enabled"), this);
+    tcp->setCheckable(true);
+    tcp->setChecked(true);
+
     menu.reset(new QMenu());
+    menu->addAction(tcp);
     menu->addAction(exit);
 
     tray->setContextMenu(menu.data());
     tray->setIcon(QIcon(":/images/android.png"));
     tray->show();
 
-    CyborgTcpSource* ts = new CyborgTcpSource(this);
-    CyborgParser* p = new CyborgParser(this);
+    p = new CyborgParser(this);
+    ts = new CyborgTcpSource(this);
+    ts->enable();
 
     connect(ts, SIGNAL(message(QString)), p, SLOT(message(QString)));
+    connect(tcp, SIGNAL(triggered(bool)), ts, SLOT(enable(bool)));
     connect(p, SIGNAL(notice(CyborgNotice)), SLOT(notice(CyborgNotice)));
 }
 

@@ -39,6 +39,9 @@ public:
 
 private slots:
     void readMessage();
+
+public slots:
+    void enable(bool = true);
 };
 
 #endif // CYBORGTCPSOURCE_H

@@ -32,6 +32,8 @@ class QAction;
 class QSystemTrayIcon;
 
 class CyborgNotice;
+class CyborgParser;
+class CyborgTcpSource;
 
 class Cyborg : public QApplication
 {
@@ -40,6 +42,9 @@ class Cyborg : public QApplication
     QSystemTrayIcon* tray;
     QAction* exit;
     QScopedPointer<QMenu> menu;
+
+    CyborgTcpSource* ts;
+    CyborgParser* p;
 
 public:
     Cyborg(int argc, char** argv);

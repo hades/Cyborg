@@ -36,10 +36,6 @@ CyborgTcpSource::CyborgTcpSource(QObject *parent)
     : CyborgSource(parent)
 {
     d = new CyborgTcpSourcePrivate();
-    if(!d->server.listen( QHostAddress::Any, 10600 ))
-    {
-        qDebug() << "failed to open listening socket:" << d->server.errorString();
-    }
 
     connect(&d->server, SIGNAL(newConnection()), SLOT(readMessage()));
 }
@@ -57,4 +53,19 @@ void CyborgTcpSource::readMessage()
     emit message(QString::fromUtf8(data.constData(), data.size()));
     connect(clientConnection, SIGNAL(disconnected()), clientConnection, SLOT(deleteLater()));
     clientConnection->disconnectFromHost();
+}
+
+void CyborgTcpSource::enable(bool on)
+{
+    if(on)
+    {
+        if(!d->server.listen( QHostAddress::Any, 10600 ))
+        {
+            qDebug() << "failed to open listening socket:" << d->server.errorString();
+        }
+    }
+    else
+    {
+        d->server.close();
+    }
 }
