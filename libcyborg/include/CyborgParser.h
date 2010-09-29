@@ -27,7 +27,9 @@
 #include <QObject>
 #include <QString>
 
-struct CyborgNotice
+#include "Cyborg_Global.h"
+
+struct CYBORG_EXPORT CyborgNotice
 {
 public:
     enum EventType { RING, SMS, MMS, BATTERY, PING, UNDEFINED=0xff };
@@ -48,7 +50,7 @@ public:
     {}
 };
 
-class CyborgParser : public QObject
+class CYBORG_EXPORT CyborgParser : public QObject
 {
     Q_OBJECT
 

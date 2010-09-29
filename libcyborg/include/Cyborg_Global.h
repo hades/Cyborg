@@ -21,22 +21,15 @@
  *
  */
 
-#ifndef CYBORGSOURCE_H
-#define CYBORGSOURCE_H
+#ifndef CYBORG_GLOBAL_H
+#define CYBORG_GLOBAL_H
 
-#include <QObject>
+#include <QtCore/QtGlobal>
 
-#include "Cyborg_Global.h"
+#ifdef cyborg_EXPORTS
+# define CYBORG_EXPORT Q_DECL_EXPORT
+#else
+# define CYBORG_EXPORT Q_DECL_IMPORT
+#endif
 
-class CYBORG_EXPORT CyborgSource: public QObject
-{
-    Q_OBJECT
-
-public:
-    CyborgSource( QObject* parent = 0 );
-
-signals:
-    void message(const QString&);
-};
-
-#endif // CYBORGSOURCE_H
+#endif // CYBORG_GLOBAL_H

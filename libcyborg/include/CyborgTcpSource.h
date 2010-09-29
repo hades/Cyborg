@@ -28,7 +28,7 @@
 
 class CyborgTcpSourcePrivate;
 
-class CyborgTcpSource: public CyborgSource
+class CYBORG_EXPORT CyborgTcpSource: public CyborgSource
 {
     Q_OBJECT
 
