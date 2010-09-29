@@ -21,38 +21,27 @@
  *
  */
 
-#ifndef CYBORG_H
-#define CYBORG_H
+#ifndef CYBORGUDPSOURCE_H
+#define CYBORGUDPSOURCE_H
 
-#include <QApplication>
-#include <QScopedPointer>
-#include <QMenu>
+#include "CyborgSource.h"
 
-class QAction;
-class QSystemTrayIcon;
+class CyborgUdpSourcePrivate;
 
-class CyborgNotice;
-class CyborgParser;
-class CyborgTcpSource;
-class CyborgUdpSource;
-
-class Cyborg : public QApplication
+class CYBORG_EXPORT CyborgUdpSource: public CyborgSource
 {
     Q_OBJECT
 
-    QSystemTrayIcon* tray;
-    QAction* exit;
-    QScopedPointer<QMenu> menu;
-
-    CyborgTcpSource* ts;
-    CyborgUdpSource* us;
-    CyborgParser* p;
-
+    CyborgUdpSourcePrivate* d;
 public:
-    Cyborg(int argc, char** argv);
+    CyborgUdpSource(QObject* parent = 0);
+    virtual ~CyborgUdpSource();
 
 private slots:
-    void notice(const CyborgNotice&);
+    void readMessage();
+
+public slots:
+    void enable(bool = true);
 };
 
-#endif // CYBORG_H
+#endif // CYBORGUDPSOURCE_H

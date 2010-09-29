@@ -3,6 +3,7 @@ set(CYBORG_H_FILES
     CyborgParser.h
     CyborgSource.h
     CyborgTcpSource.h
+    CyborgUdpSource.h
     )
 
 set(CYBORG_H_FULLPATHS)

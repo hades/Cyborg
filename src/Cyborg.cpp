@@ -31,6 +31,7 @@
 
 #include "CyborgParser.h"
 #include "CyborgTcpSource.h"
+#include "CyborgUdpSource.h"
 
 Cyborg::Cyborg(int argc, char**argv)
     : QApplication(argc, argv)
@@ -49,8 +50,13 @@ Cyborg::Cyborg(int argc, char**argv)
     tcp->setCheckable(true);
     tcp->setChecked(true);
 
+    QAction* udp = new QAction(tr("&UDP Enabled"), this);
+    udp->setCheckable(true);
+    udp->setChecked(true);
+
     menu.reset(new QMenu());
     menu->addAction(tcp);
+    menu->addAction(udp);
     menu->addAction(exit);
 
     tray->setContextMenu(menu.data());
@@ -61,8 +67,13 @@ Cyborg::Cyborg(int argc, char**argv)
     ts = new CyborgTcpSource(this);
     ts->enable();
 
+    us = new CyborgUdpSource(this);
+    us->enable();
+
     connect(ts, SIGNAL(message(QString)), p, SLOT(message(QString)));
+    connect(us, SIGNAL(message(QString)), p, SLOT(message(QString)));
     connect(tcp, SIGNAL(triggered(bool)), ts, SLOT(enable(bool)));
+    connect(udp, SIGNAL(triggered(bool)), us, SLOT(enable(bool)));
     connect(p, SIGNAL(notice(CyborgNotice)), SLOT(notice(CyborgNotice)));
 }
 

@@ -2,6 +2,7 @@ set(CYBORG_CPP_FILES
     CyborgParser.cpp
     CyborgSource.cpp
     CyborgTcpSource.cpp
+    CyborgUdpSource.cpp
     )
 
 if(NOT WIN32)
