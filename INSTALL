@@ -1,0 +1,18 @@
+Cyborg -- the multi-platform android-notifier client
+====================================================
+
+This is a Qt client for the android-notifier project. Please read the following
+link for device setup instructions:
+
+http://code.google.com/p/android-notifier/
+
+ INSTALLATION
+ ============
+
+Installation is simple:
+
+ mkdir build
+ cd build
+ cmake ..
+ make
+ sudo make install

@@ -1,0 +1,9 @@
+set(CYBORG_RESOURCES cyborg.qrc)
+
+set(CYBORG_QRC_FULLPATHS)
+foreach(hfile ${CYBORG_RESOURCES})
+    set(thfile ${CMAKE_CURRENT_SOURCE_DIR}/${hfile})
+    list(APPEND CYBORG_QRC_FULLPATHS ${thfile})
+endforeach(hfile ${CYBORG_RESOURCES})
+
+set(CYBORG_QRC_FULLPATHS ${CYBORG_QRC_FULLPATHS} PARENT_SCOPE)
