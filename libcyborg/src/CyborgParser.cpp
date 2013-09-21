@@ -25,15 +25,26 @@
 #include <QStringList>
 
 #include "CyborgParser.h"
+#include "CyborgPassKey.h"
 
 CyborgParser::CyborgParser(QObject *parent)
-    : QObject(parent)
+    : QObject(parent), passKey(0)
 {
 }
 
 void CyborgParser::message(const QByteArray& msgdata)
 {
-    QString text = QString::fromUtf8(msgdata);
+
+    QString text;
+    if ( passKey ) {
+        text = passKey->decode(msgdata);
+        if (text.isEmpty()) {
+            qDebug() << "Unable to decrypt message, discarding";
+	}
+    } else {
+        text = QString::fromUtf8(msgdata);
+    }
+
     QStringList parts = text.split('/');
     if(parts.size() < 4)
     {
@@ -76,4 +87,20 @@ void CyborgParser::message(const QByteArray& msgdata)
 
     emit notice( CyborgNotice( version, deviceid, noticeid, t,
                                data, parts.join( "/" ) ) );
+}
+
+void CyborgParser::setPassPhrase(const QString& passPhrase)
+{
+    if ( !CyborgPassKey::isSupported() ) {
+        return;
+    }
+
+    if ( passKey != 0 ) {
+        delete passKey;
+    }
+    if ( passPhrase.isEmpty() ) {
+        passKey = 0;
+    } else {
+        passKey = new CyborgPassKey(passPhrase);
+    }
 }

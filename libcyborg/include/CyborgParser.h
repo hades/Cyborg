@@ -28,6 +28,7 @@
 #include <QString>
 
 #include "Cyborg_Global.h"
+#include "CyborgPassKey.h"
 
 class CYBORG_EXPORT CyborgNotice
 {
@@ -57,11 +58,15 @@ class CYBORG_EXPORT CyborgParser : public QObject
 public:
     CyborgParser( QObject* parent = 0 );
 
+    void setPassPhrase(const QString& );
 public slots:
     void message(const QByteArray&);
 
 signals:
     void notice(CyborgNotice);
+
+private:
+    CyborgPassKey *passKey;
 };
 
 #endif // CYBORGPARSER_H
