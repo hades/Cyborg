@@ -36,7 +36,7 @@ public:
     CyborgSource( QObject* parent = 0 );
 
 signals:
-    void message(const QString&);
+    void message(const QByteArray&);
 };
 
 #endif // CYBORGSOURCE_H

@@ -51,7 +51,7 @@ void CyborgUdpSource::readMessage()
         QByteArray data;
         data.resize(d->socket.pendingDatagramSize());
         d->socket.readDatagram(data.data(), data.size());
-        emit message(QString::fromUtf8(data.constData(), qstrnlen(data.constData(), data.size())));
+        emit message(data);
     }
 }
 

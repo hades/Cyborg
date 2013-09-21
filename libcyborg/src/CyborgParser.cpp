@@ -31,8 +31,9 @@ CyborgParser::CyborgParser(QObject *parent)
 {
 }
 
-void CyborgParser::message(const QString& text)
+void CyborgParser::message(const QByteArray& msgdata)
 {
+    QString text = QString::fromUtf8(msgdata);
     QStringList parts = text.split('/');
     if(parts.size() < 4)
     {

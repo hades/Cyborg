@@ -58,7 +58,7 @@ public:
     CyborgParser( QObject* parent = 0 );
 
 public slots:
-    void message(const QString&);
+    void message(const QByteArray&);
 
 signals:
     void notice(CyborgNotice);
