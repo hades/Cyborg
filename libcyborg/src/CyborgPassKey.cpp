@@ -49,7 +49,7 @@ QString CyborgPassKey::decode(const QByteArray &data)
 
 	QByteArray out = QCA::SecureArray(cipher.process(data)).toByteArray();
 	if (!cipher.ok()) {
-		return "";
+		return QString();
 	}
 
 	return QString::fromUtf8(out);
