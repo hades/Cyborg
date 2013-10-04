@@ -92,6 +92,7 @@ void CyborgParser::message(const QByteArray& msgdata)
 void CyborgParser::setPassPhrase(const QString& passPhrase)
 {
     if ( !CyborgCoder::isSupported() ) {
+        qWarning() << "Unable to set cipher passphrase, this system does not support the necessary algorithm";
         return;
     }
 

@@ -18,7 +18,7 @@ bool CyborgCoder::isSupported()
 CyborgCoder::CyborgCoder(const QString& passPhrase, int numHashes)
 {
     if ( numHashes < 1) {
-        qWarning() << "PassKey numHashes is invalid, assuming (1)";
+        qWarning() << "Pass phrase numHashes is invalid, assuming (1)";
         numHashes = 1;
     }
 
