@@ -19,6 +19,7 @@ CyborgPassKey::CyborgPassKey(const QString& passPhrase, int numHashes)
 {
 	if ( numHashes < 1) {
 		qWarning() << "PassKey numHashes is invalid, assuming (1)";
+		numHashes = 1;
 	}
 
 	QByteArray bytes = passPhrase.toUtf8();
