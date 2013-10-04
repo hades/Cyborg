@@ -7,14 +7,14 @@
 class CyborgPassKey
 {
 public:
-	CyborgPassKey(const QString& passPhrase, int numHashes=10);
-	CyborgPassKey(const QByteArray&);
-	QString decode(const QByteArray &data);
+    CyborgPassKey(const QString& passPhrase, int numHashes=10);
+    CyborgPassKey(const QByteArray&);
+    QString decode(const QByteArray &data);
 
-	static bool isSupported();
+    static bool isSupported();
 
 private:
-	QByteArray key;
+    QByteArray key;
 };
 
 #endif

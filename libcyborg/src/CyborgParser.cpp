@@ -40,7 +40,7 @@ void CyborgParser::message(const QByteArray& msgdata)
         text = passKey->decode(msgdata);
         if (text.isEmpty()) {
             qDebug() << "Unable to decrypt message, discarding";
-	}
+        }
     } else {
         text = QString::fromUtf8(msgdata);
     }
