@@ -1,9 +1,9 @@
-#include "CyborgPassKey.h"
+#include "CyborgCoder.h"
 #include <QtCrypto>
 
 #include <QDebug>
 
-bool CyborgPassKey::isSupported() 
+bool CyborgCoder::isSupported() 
 {
     QCA::init();
     if (!QCA::isSupported("md5")) {
@@ -15,7 +15,7 @@ bool CyborgPassKey::isSupported()
     return true;
 }
 
-CyborgPassKey::CyborgPassKey(const QString& passPhrase, int numHashes)
+CyborgCoder::CyborgCoder(const QString& passPhrase, int numHashes)
 {
     if ( numHashes < 1) {
         qWarning() << "PassKey numHashes is invalid, assuming (1)";
@@ -32,12 +32,12 @@ CyborgPassKey::CyborgPassKey(const QString& passPhrase, int numHashes)
     this->key = bytes;
 }
 
-CyborgPassKey::CyborgPassKey(const QByteArray& bytes)
+CyborgCoder::CyborgCoder(const QByteArray& bytes)
 {
     this->key = bytes;
 }
 
-QString CyborgPassKey::decode(const QByteArray &data)
+QString CyborgCoder::decode(const QByteArray &data)
 {
     QCA::Hash hashObj("md5");
     hashObj.update(this->key);

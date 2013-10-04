@@ -28,7 +28,7 @@
 #include <QString>
 
 #include "Cyborg_Global.h"
-#include "CyborgPassKey.h"
+#include "CyborgCoder.h"
 
 class CYBORG_EXPORT CyborgNotice
 {
@@ -66,7 +66,7 @@ signals:
     void notice(CyborgNotice);
 
 private:
-    CyborgPassKey *passKey;
+    CyborgCoder *coder;
 };
 
 #endif // CYBORGPARSER_H

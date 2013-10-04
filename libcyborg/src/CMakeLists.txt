@@ -3,7 +3,7 @@ set(CYBORG_CPP_FILES
     CyborgSource.cpp
     CyborgTcpSource.cpp
     CyborgUdpSource.cpp
-    CyborgPassKey.cpp
+    CyborgCoder.cpp
     )
 
 if(NOT WIN32)
