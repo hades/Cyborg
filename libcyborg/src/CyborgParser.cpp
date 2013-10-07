@@ -25,14 +25,26 @@
 #include <QStringList>
 
 #include "CyborgParser.h"
+#include "CyborgCoder.h"
 
 CyborgParser::CyborgParser(QObject *parent)
-    : QObject(parent)
+    : QObject(parent), coder(0)
 {
 }
 
-void CyborgParser::message(const QString& text)
+void CyborgParser::message(const QByteArray& msgdata)
 {
+
+    QString text;
+    if ( coder ) {
+        text = coder->decode(msgdata);
+        if (text.isEmpty()) {
+            qDebug() << "Unable to decrypt message, discarding";
+        }
+    } else {
+        text = QString::fromUtf8(msgdata);
+    }
+
     QStringList parts = text.split('/');
     if(parts.size() < 4)
     {
@@ -75,4 +87,21 @@ void CyborgParser::message(const QString& text)
 
     emit notice( CyborgNotice( version, deviceid, noticeid, t,
                                data, parts.join( "/" ) ) );
+}
+
+void CyborgParser::setPassPhrase(const QString& passPhrase)
+{
+    if ( !CyborgCoder::isSupported() ) {
+        qWarning() << "Unable to set cipher passphrase, this system does not support the necessary algorithm";
+        return;
+    }
+
+    if ( coder != 0 ) {
+        delete coder;
+    }
+    if ( passPhrase.isEmpty() ) {
+        coder = 0;
+    } else {
+        coder = new CyborgCoder(passPhrase);
+    }
 }

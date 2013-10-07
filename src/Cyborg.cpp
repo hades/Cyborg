@@ -70,8 +70,8 @@ Cyborg::Cyborg(int argc, char**argv)
     us = new CyborgUdpSource(this);
     us->enable();
 
-    connect(ts, SIGNAL(message(QString)), p, SLOT(message(QString)));
-    connect(us, SIGNAL(message(QString)), p, SLOT(message(QString)));
+    connect(ts, SIGNAL(message(QByteArray)), p, SLOT(message(QByteArray)));
+    connect(us, SIGNAL(message(QByteArray)), p, SLOT(message(QByteArray)));
     connect(tcp, SIGNAL(triggered(bool)), ts, SLOT(enable(bool)));
     connect(udp, SIGNAL(triggered(bool)), us, SLOT(enable(bool)));
     connect(p, SIGNAL(notice(CyborgNotice)), SLOT(notice(CyborgNotice)));

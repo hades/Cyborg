@@ -50,7 +50,7 @@ void CyborgTcpSource::readMessage()
     QTcpSocket *clientConnection = d->server.nextPendingConnection();
     clientConnection->waitForReadyRead(100); // TODO: make more accurate
     QByteArray data = clientConnection->readAll();
-    emit message(QString::fromUtf8(data.constData(), qstrnlen(data.constData(), data.size())));
+    emit message(data);
     connect(clientConnection, SIGNAL(disconnected()), clientConnection, SLOT(deleteLater()));
     clientConnection->disconnectFromHost();
 }
